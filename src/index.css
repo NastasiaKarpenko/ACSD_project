@@ -1,3 +1,15 @@
+:root {
+  /*
+COLORS
+*/
+  --main-color: #405d27;
+  --buttons-color: #c1946a;
+  --fonts-color: #82b74b;
+  --header-footer-color: #3e4444;
+  --main-background-color: #fbf5e4;
+
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +22,53 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/*Navbar & Footer */
+.navbar {
+  background-color: var(--header-footer-color);
+  position: sticky;
+  padding: 10px 0;
+  text-align: right;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 100px;
+}
+.navbar a,
+.footer a {
+  color: var(--main-background-color);
+  text-decoration: none;
+  margin-right: 20px;
+}
+
+.navbar a:hover,
+.footer a:hover {
+  color: var(--buttons-color) !important;
+}
+
+.navbar a:visited,
+.footer a:visited {
+  color: var(--main-background-color);
+}
+
+.navbar a.active {
+  color: var(--fonts-color) !important;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  background-color: var(--header-footer-color);
+  padding: 10px 0;
+  width: 100%;
+  height: 100px;
+  font-weight: 200;
+  font-size: small;
+}
+
+.footer span{
+  color: var(--fonts-color);
 }
