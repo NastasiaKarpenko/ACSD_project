@@ -13,26 +13,45 @@ function Register(prop) {
     }
     function handlePassword(e) {
         e.preventDefault();
+
         setPassword(e.target.value);
     }
     function handleEmail(e) {
         e.preventDefault();
+
         setEmail(e.target.value);
     }
     async function handleSubmit(e) {
         e.preventDefault();
         try {
-            let sendData = await axios.post(`http://localhost:8000/api/user/`, {
-                name: userName,
-                email: email,
-                password: password
-
+            // providing data as x-www-form-urlencoded as requested by the backend, using a URL creator and constructing the address
+            const formData = new URLSearchParams();
+            formData.append('name', userName);
+            formData.append('email', email);
+            formData.append('password', password);
+            // API request 
+            const response = await axios.post('http://localhost:8000/api/user/', formData, {
+                // specify the format the data is provided to the backend
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
             });
-            console.log("User created successfully:", sendData.data);
+            console.log("User created successfully:", response.data);
             setMessage("");
-            prop.handleClick();
+            alert("Registration successfull, you can log in now!")
+            prop.externalToggle();
 
-        } catch { }
+        } catch (error) {
+            console.log("checkpoint" + error)
+
+            if (error.response.status === 500) {
+                console.error('An error occurred:', error.response.data);
+                setMessage("Email address already exist");
+            } else {
+                console.error('An error occurred:', error.response.data);
+                setMessage("Please try again later");
+            }
+        }
     }
 
     return (
