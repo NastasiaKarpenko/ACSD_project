@@ -72,3 +72,18 @@ code {
 .footer span{
   color: var(--fonts-color);
 }
+
+.buttons {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  color: #fff;
+  background-color: var(--main-color);
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.buttons:hover {
+  background-color: var(--fonts-color);
+}
