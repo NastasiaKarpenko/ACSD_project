@@ -10,6 +10,7 @@ function Navbar() {
         <NavLink to="/Blog">Journal</NavLink>
         <NavLink to="/Catalog">Find your Item</NavLink>
         <NavLink to="/LogIn">Your account</NavLink>
+
       </nav>
     </div>
   );
