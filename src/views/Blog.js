@@ -1,16 +1,19 @@
-import ArticleList from "../components/ArticleList";
+
+import { Link } from 'react-router-dom';
+import data from '../components/data'; 
 
 function Blog() {
-  const style = {
-    backgroundImage: `url('https://github.com/NastasiaKarpenko/my-eire-app/blob/main/src/images/events/IMG_2.jpeg?raw=true')`,
-    backgroundPosition: "center",
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-  };
   return (
-    <div className="blog">
-      <ArticleList />
-      <div className="blogImg" style={style}></div>
+    <div>
+      {data.map((article, index) => (
+        <div key={index}>
+          <img src={article.img} alt="Article" style={{ width: "100px", height: "100px" }} />
+          <h3>{article.header}</h3>
+          <p>{article.date}</p>
+          <p>{article.short}</p>
+          <Link to={`/blog/${article.id}`} className="buttons">Read More</Link> 
+        </div>
+      ))}
     </div>
   );
 }
