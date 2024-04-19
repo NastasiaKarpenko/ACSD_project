@@ -1,74 +1,75 @@
-import { useState } from 'react';
+import React, { useState } from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 function Form() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [errors, setErrors] = useState({});
 
-  const validateForm = () => {
-    const newErrors = {};
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
-    // Валідація імені
-    if (!name.trim()) {
-      newErrors.name = 'Name is required';
-    }
-
-    // Валідація електронної пошти
-    if (!email) {
-      newErrors.email = 'Email is required';
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
-      newErrors.email = 'Email is invalid';
-    }
-
-    return newErrors;
+  const initialValues = {
+    name: "",
+    email: "",
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
 
-    // Перевірка валідації
-    const formErrors = validateForm();
-    if (Object.keys(formErrors).length > 0) {
+  const validationSchema = Yup.object({
+    name: Yup.string().matches(/^[A-Za-z ]*$/, "Only alphabets are allowed for this field ").required("Required"),
+    email: Yup.string().email("Must be a valid email").required("Required"),
+  });
 
-      // Є помилки, оновити стан
-      setErrors(formErrors);
-    } else {
+  const formik = useFormik({
+    initialValues,
+    validationSchema,
+    onSubmit: (values, { setSubmitting, resetForm }) => {
+        setIsSubmitted(true);
+        
+        console.log(values);
+        
+        resetForm();
+        setSubmitting(false);
+  }});
 
-      // Форма валідна, можна надсилати дані
-      alert(`Thank you, ${name}. Check your email to get discount`);
-      // Очистити форму (необов'язково)
-      setName('');
-      setEmail('');
-      setErrors({});
-    }
-  };
+  const getFormikValidationErrorHandler = (formik) => (name) =>
+    formik.touched[name] && formik.errors[name] ? (
+      <div className="formError">
+        <span className="">{formik.errors[name]}</span>
+      </div>
+    ) : null;
 
+
+  const handleValidationError = getFormikValidationErrorHandler(formik);
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} noValidate>
-        <label> Enter your name:
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          {errors.name && <div style={{ color: 'red' }}>{errors.name}</div>}
-        </label>
-        <label> Enter your email:
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          {errors.email && <div style={{ color: 'red' }}>{errors.email}</div>}
-        </label>
-        <input type="submit" />
+    <div className="formWrapper">
+      <h3 className="formNotice">
+        {isSubmitted
+          ? "Thank you! Check your email to get discount!"
+          : "Fill the form down bellow to get discount  for first order"}
+      </h3>
+      <form onSubmit={formik.handleSubmit} className="formContainer">
+        <label htmlFor="firstName" className="formLabel">Enter your Name</label>
+        <input
+          name="name"
+          placeholder="Jane"
+          className="formInput"   
+          {...formik.getFieldProps("name")}
+        />
+        {handleValidationError("name")}
+
+        <label htmlFor="email" className="formLabel">Enter your email</label>
+        <input
+          name="email"
+          placeholder="example@gmail.com"
+          className="formInput"
+          {...formik.getFieldProps("email")}
+        />
+        {handleValidationError("email")}
+
+        <div className="formBtnPlace"><button type="submit" className="formBtn">Submit</button></div>
       </form>
-
-
     </div>
   );
 }
 
+ 
 export default Form;
