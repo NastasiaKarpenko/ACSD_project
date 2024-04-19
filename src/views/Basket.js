@@ -1,52 +1,3 @@
-// import React, { useState, useEffect } from 'react';
-// import ProductInfo from '../components/ProductInfo';
-
-// function Basket() {
-//   const [items, setItems] = useState([]);
-//   const [itemsBasket, setItemsBasket] = useState([]);
-
-//   const selectedItems = JSON.parse(localStorage.getItem('basket'));
-//   console.log(selectedItems);
-
-
-//   useEffect(() => {
-
-
-//     getItemInfo();
-
-//   }, []);
-
-//   const getItemInfo = async function () {
-//     try {
-//       const response = await fetch('https://dummyjson.com/products');
-//       const itemData = await response.json();
-//       setItems(itemData.products);
-//     } catch (error) {
-//       console.error("There was an error fetching the data, please try again later");
-//     }
-//     // console.log(items);
-//   }
-
-
-//   useEffect(() => {
-//     const filterItems = items.filter(item => selectedItems.some(data => parseInt(data.id) === item.id));
-//     setItemsBasket(filterItems);
-//     // console.log(filterItems);
-//   }, [items]);
-
-//   return (
-//     <div>
-//       <h2>Basket</h2>
-//       <ul>
-//         {itemsBasket.map((product, index) => (
-//           <ProductInfo key={index} product={product} />
-//         ))}
-//       </ul>
-//     </div>
-//   );
-// };
-
-// export default Basket;
 import { useState, useEffect } from "react";
 import ProductInfo from '../components/ProductInfo';
 import Summary from "../components/Summary";
@@ -61,62 +12,65 @@ function Basket() {
   let count = 0;
 
   useEffect(() => {
-    // clearing the array every time the app is saved
     setItems([]);
     if (selectedItems) {
-      // iterating through the id from the localstorage
       selectedItems.map((i) => {
-
         getItemInfo(i);
-
       })
       getItemInfo();
     }
   }, []);
 
-
   const getItemInfo = async function (id) {
-
-
     try {
-
       const response = await fetch(`https://dummyjson.com/product/${id.id}`);
       const itemData = await response.json();
-      // adding the quantity of each product
-      const conbinedItemData = { ...itemData, quantity: id.quantity };
-      storeFetchData(conbinedItemData);
-
+      const combinedItemData = { ...itemData, quantity: id.quantity };
+      storeFetchData(combinedItemData);
     } catch (error) {
-
-
       console.error("There was an error fetching the data, please try again later");
-
     }
   }
-  // preventing useEffect from storing duplicated lines
-  function storeFetchData(itemData) {
 
+  function storeFetchData(itemData) {
     if (count < selectedItems.length) {
       count++
       setItems(prevItems => [...prevItems, itemData]);
     }
   }
-  // console.log(items);
-  return (
-    <div>
-      <div>
-        {selectedItems ? items.map((i, index) => (
-          <ProductInfo key={index} item={i} />
-        )) : <Link to="/Catalog"><h3>No items in the basket, go to catalog</h3></Link>}
-        {/* {items.map((i, index) => (
-          <ProductInfo key={index} item={i} />
-        ))} */}
-      </div>
-      <div>
-        {isLogin && selectedItems ? <p><Summary items={items} /></p> : <Link to="/LogIn"><button >Log in first</button></Link>}
 
+  return (
+    <div className="container py-4">
+      <div className="row">
+        <div className="col-lg-8">
+          <div className="card mb-3">
+            <div className="card-header">
+              <h5 className="card-title mb-0">Basket</h5>
+            </div>
+            <div className="card-body">
+              {selectedItems ? items.map((i, index) => (
+                <ProductInfo key={index} item={i} />
+              )) : (
+                <Link to="/Catalog" className="btn btn-secondary">
+                  Go to Catalog
+                </Link>
+              )}
+            </div>
+          </div>
+        </div>
+        <div className="col-lg-4">
+          <div className="card">
+            <div className="card-header">
+              <h5 className="card-title mb-0">Summary</h5>
+            </div>
+            <div className="card-body">
+              {isLogin && selectedItems ? <Summary items={items} /> : <Link to="/LogIn" className="btn btn-primary btn-block">Log in first</Link>}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   )
 }
+
 export default Basket;

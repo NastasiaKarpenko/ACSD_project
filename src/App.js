@@ -9,6 +9,8 @@ import Blog from "./views/Blog.js";
 import Catalog from "./views/Catalog.js";
 import LogIn from "./views/LogIn.js";
 import ProductPage from "./views/ProductPage.js";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 function App() {
