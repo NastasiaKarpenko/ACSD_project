@@ -3,12 +3,14 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 
 function Form() {
+
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const initialValues = {
     name: "",
     email: "",
   };
+
 
   const validationSchema = Yup.object({
     name: Yup.string().matches(/^[A-Za-z ]*$/, "Only alphabets are allowed for this field ").required("Required"),
@@ -33,6 +35,7 @@ function Form() {
         <span className="">{formik.errors[name]}</span>
       </div>
     ) : null;
+
 
   const handleValidationError = getFormikValidationErrorHandler(formik);
 
@@ -68,4 +71,5 @@ function Form() {
   );
 }
 
+ 
 export default Form;

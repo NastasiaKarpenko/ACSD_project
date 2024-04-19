@@ -1,3 +1,8 @@
+/* index.css */
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+
+
 :root {
   /*
 COLORS
@@ -35,6 +40,7 @@ code {
   left: 0;
   right: 100px;
 }
+
 .navbar a,
 .footer a {
   color: var(--main-background-color);
@@ -69,11 +75,11 @@ code {
   font-size: small;
 }
 
-.footer span{
+.footer span {
   color: var(--fonts-color);
 }
 
-.buttons {
+<<<<<<< HEAD .buttons {
   display: inline-block;
   margin-top: 20px;
   padding: 10px 20px;
@@ -106,9 +112,10 @@ code {
   bottom: 20%;
   right: 10%;
 
-  background-color: rgba(255, 255, 255, .3);  
+  background-color: rgba(255, 255, 255, .3);
   color: black;
 }
+
 /* carousel screen */
 .carousel-container {
   height: 350px;
@@ -129,7 +136,7 @@ code {
   width: 100%;
 }
 
-.item-title{
+.item-title {
   font-weight: 600;
 }
 
@@ -142,17 +149,19 @@ code {
   background-size: auto;
 }
 
-.inner-text {position: absolute;
+.inner-text {
+  position: absolute;
   padding: 25px;
   height: 50vh;
   width: 600px;
   bottom: 10%;
   left: 30%;
   text-align: center;
-  background-color: rgba(193, 58, 58, 0.3);  
-  color: black;}
+  background-color: rgba(193, 58, 58, 0.3);
+  color: black;
+}
 
-.discount-section h2{
+.discount-section h2 {
   font-size: 200% !important;
   font-weight: normal;
   color: var(--main-branding-color) !important;
@@ -236,3 +245,18 @@ code {
 /* last screen */
 
 /* HOME PAGE end */
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+
+
+}
+
+.table th,
+.table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  border: none;
+}
