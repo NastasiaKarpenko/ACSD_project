@@ -57,6 +57,7 @@ function AccessPoint() {
             setAccessMessage("welcome back " + accountData.name);
             setIsLogin(true);
             setError("");
+            // Ideally it would be best to store a JWT token so the data is not exposed and accessible
             localStorage.setItem("user", JSON.stringify(accountData.id));
         } else {
             console.log("not match");
@@ -70,7 +71,7 @@ function AccessPoint() {
         return (
             <div>
                 <h3>{accessMessage}</h3>
-                <Link to="/Basket"><button >Continue to checkout</button></Link>
+                <Link to="/Basket"><button >Continue to basket</button></Link>
                 <Link to="/Catalog"><button>Continue shopping</button></Link>
             </div>
         )
