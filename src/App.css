@@ -32,9 +32,32 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
 
 
+/* Define a class for cards in catalog view */
+.catalog-card {
+  transition: transform 0.3s ease;
+}
+
+/* Apply hover effect only to cards in catalog view */
+.catalog-card:hover {
+  transform: scale(1.05);
+}
+
+
+
+
+/* Define a class for cards in catalog view */
+.catalog-card {
+  transition: transform 0.3s ease;
+}
+
+/* Apply hover effect only to cards in catalog view */
+.catalog-card:hover {
+  transform: scale(1.05);
+}

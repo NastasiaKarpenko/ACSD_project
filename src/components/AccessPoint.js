@@ -1,102 +1,95 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import md5 from "md5";
 import { Link } from 'react-router-dom';
-
-
 
 function AccessPoint() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [accountData, setAccountData] = useState([]);
-    const [error, setError] = useState();
+    const [error, setError] = useState("");
     const [isLogIn, setIsLogin] = useState(false);
-    const [accessMessage, setAccessMessage] = useState("")
+    const [accessMessage, setAccessMessage] = useState("");
 
     useEffect(() => {
 
         if (password && accountData) {
             verifyAccess();
         }
-        // if (userID) {
-        //     setAccessMessage("welcome back " + accountData.name);
-        //     setIsLogin(true);
-        // }
     }, [accountData]);
+
     function handleEmail(e) {
-        e.preventDefault();
         setEmail(e.target.value);
-
     }
+
     function handlePassword(e) {
-        e.preventDefault();
         setPassword(e.target.value);
-
     }
 
-    async function getAccount() {
-
+    async function getAccount(e) {
+        e.preventDefault();
         try {
             let response = await axios.get(`http://localhost:8000/api/user/${email}`);
 
             if (response.data.data) {
                 setAccountData(response.data.data);
-
             } else {
                 setError("User not found");
             }
-
         } catch (error) {
-            setError("There is a problem retriving the data, try again later");
+            setError("There is a problem retrieving the data, try again later");
         }
-
     }
+
     function verifyAccess() {
-        console.log(password);
         const hash = md5(password);
-        console.log(hash);
-        console.log(accountData.password);
 
         if (accountData.password === hash) {
-            console.log("Log in succsesfully");
-            setAccessMessage("welcome back " + accountData.name);
+            setAccessMessage("Welcome back " + accountData.name);
             setIsLogin(true);
             setError("");
-            // Ideally it would be best to store a JWT token so the data is not exposed and accessible
             localStorage.setItem("user", JSON.stringify(accountData.id));
         } else {
-            console.log("not match");
             setError("Email address or password not matching");
             setIsLogin(false);
-
         }
     }
 
-    if (isLogIn) {
-        return (
-            <div>
-                <h3>{accessMessage}</h3>
-                <Link to="/Basket"><button >Continue to basket</button></Link>
-                <Link to="/Catalog"><button>Continue shopping</button></Link>
+    return (
+        <div className="container mt-5">
+            <div className="row justify-content-center">
+                <div className="col-md-6">
+                    {isLogIn ? (
+                        <div className="card">
+                            <div className="card-body">
+                                <h3>{accessMessage}</h3>
+                                <Link to="/Basket" className="btn btn-primary">Continue to basket</Link>
+                                <Link to="/Catalog" className="btn btn-secondary ms-2">Continue shopping</Link>
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="card">
+                            <div className="card-body">
+                                <h3 className="card-title">Log In</h3>
+                                <h4>{error}</h4>
+                                <form>
+                                    <div className="mb-3">
+                                        <label htmlFor="email" className="form-label">Email address:</label>
+                                        <input type="email" className="form-control" id="email" value={email} onChange={handleEmail} />
+                                    </div>
+                                    <div className="mb-3">
+                                        <label htmlFor="password" className="form-label">Password:</label>
+                                        <input type="password" className="form-control" id="password" value={password} onChange={handlePassword} />
+                                    </div>
+                                    <button type="submit" className="btn btn-primary" onClick={getAccount}>Log in</button>
+                                </form>
+                            </div>
+                        </div>
+                    )}
+                </div>
             </div>
-        )
-    } else {
-        return (
-            <div>
-                <h3>Log In</h3>
-                <h4>{error}</h4>
-
-                <h4>User name:</h4>
-                <input type="text" value={email} placeholder='Enter email' onChange={handleEmail} />
-                <h4>Enter password:</h4>
-                <input type="password" value={password} placeholder='Password' onChange={handlePassword} />
-                <button onClick={getAccount}  >
-                    Log in
-                </button>
-
-            </div>
-        )
-    }
-
+        </div>
+    );
 }
+
 export default AccessPoint;

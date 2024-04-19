@@ -6,10 +6,7 @@ function Catalog() {
   const [itemsBasket, setItemsBasket] = useState([]);
 
   useEffect(() => {
-
-
     getItemInfo();
-
   }, []);
 
   const getItemInfo = async function () {
@@ -21,18 +18,18 @@ function Catalog() {
     } catch (error) {
       console.error("There was an error fetching the data, please try again later");
     }
-    // console.log(items);
   }
 
 
   return (
-    <div>
-      <h2>Catalog</h2>
-      <ul>
+    <div className="container py-4">
+      <h2 className="mb-4">Catalog</h2>
+      <div className="row row-cols-1 row-cols-md-3 g-4">
         {items.map((item, index) => (
+
           <CatalogLayout key={index} item={item} />
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
