@@ -59,17 +59,19 @@ function Basket() {
   const [items, setItems] = useState([]);
 
   let count = 0;
+
   useEffect(() => {
     // clearing the array every time the app is saved
     setItems([]);
-    // iterating through the id from the localstorage
-    selectedItems.map((i) => {
+    if (selectedItems) {
+      // iterating through the id from the localstorage
+      selectedItems.map((i) => {
 
-      getItemInfo(i);
+        getItemInfo(i);
 
-    })
-    getItemInfo();
-
+      })
+      getItemInfo();
+    }
   }, []);
 
 
@@ -103,14 +105,15 @@ function Basket() {
   return (
     <div>
       <div>
-
-        {items.map((i, index) => (
-
+        {selectedItems ? items.map((i, index) => (
           <ProductInfo key={index} item={i} />
-        ))}
+        )) : <Link to="/Catalog"><h3>No items in the basket, go to catalog</h3></Link>}
+        {/* {items.map((i, index) => (
+          <ProductInfo key={index} item={i} />
+        ))} */}
       </div>
       <div>
-        {isLogin ? <p><Summary items={items} /></p> : <Link to="/LogIn"><button >Log in first</button></Link>}
+        {isLogin && selectedItems ? <p><Summary items={items} /></p> : <Link to="/LogIn"><button >Log in first</button></Link>}
 
       </div>
     </div>

@@ -16,12 +16,12 @@ function ProductInfo(props) {
                 <p>Brand: {props.item.brand}</p>
                 <p>Price: {currency}{props.item.price}</p>
                 <p>Quantity: {props.item.quantity}</p>
-                <select name="quantity" defaultValue={selectedItems[0].quantity} id="amount">
+                {/* <select name="quantity" defaultValue={selectedItems[0].quantity} id="amount">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
-                </select>
+                </select> */}
 
 
             </div>
