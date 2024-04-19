@@ -14,9 +14,14 @@ function AccessPoint() {
     const [accessMessage, setAccessMessage] = useState("")
 
     useEffect(() => {
+
         if (password && accountData) {
             verifyAccess();
         }
+        // if (userID) {
+        //     setAccessMessage("welcome back " + accountData.name);
+        //     setIsLogin(true);
+        // }
     }, [accountData]);
     function handleEmail(e) {
         e.preventDefault();
@@ -29,8 +34,8 @@ function AccessPoint() {
 
     }
 
-    async function getAccount(e) {
-        e.preventDefault();
+    async function getAccount() {
+
         try {
             let response = await axios.get(`http://localhost:8000/api/user/${email}`);
 
@@ -80,15 +85,15 @@ function AccessPoint() {
             <div>
                 <h3>Log In</h3>
                 <h4>{error}</h4>
-                <form>
-                    <h4>User name:</h4>
-                    <input type="text" value={email} placeholder='Enter email' onChange={handleEmail} />
-                    <h4>Enter password:</h4>
-                    <input type="password" value={password} placeholder='Password' onChange={handlePassword} />
-                    <button onClick={getAccount}  >
-                        Log in
-                    </button>
-                </form>
+
+                <h4>User name:</h4>
+                <input type="text" value={email} placeholder='Enter email' onChange={handleEmail} />
+                <h4>Enter password:</h4>
+                <input type="password" value={password} placeholder='Password' onChange={handlePassword} />
+                <button onClick={getAccount}  >
+                    Log in
+                </button>
+
             </div>
         )
     }

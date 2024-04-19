@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
 function Form() {
-  const[name, setName] = useState("");
-  const[email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [errors, setErrors] = useState({});
 
   const validateForm = () => {
@@ -10,22 +10,22 @@ function Form() {
 
     // Валідація імені
     if (!name.trim()) {
-        newErrors.name = 'Name is required';
-      }
-  
-      // Валідація електронної пошти
-      if (!email) {
-        newErrors.email = 'Email is required';
-      } else if (!/\S+@\S+\.\S+/.test(email)) {
-        newErrors.email = 'Email is invalid';
-      }
-  
-      return newErrors;
-    };
+      newErrors.name = 'Name is required';
+    }
+
+    // Валідація електронної пошти
+    if (!email) {
+      newErrors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      newErrors.email = 'Email is invalid';
+    }
+
+    return newErrors;
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    
+
     // Перевірка валідації
     const formErrors = validateForm();
     if (Object.keys(formErrors).length > 0) {
@@ -42,33 +42,33 @@ function Form() {
       setErrors({});
     }
   };
-  
 
-    return (
-      <div>
-       <form onSubmit={handleSubmit} noValidate>
+
+  return (
+    <div>
+      <form onSubmit={handleSubmit} noValidate>
         <label> Enter your name:
-            <input
+          <input
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            />
-            {errors.name && <div style={{ color: 'red' }}>{errors.name}</div>}
+          />
+          {errors.name && <div style={{ color: 'red' }}>{errors.name}</div>}
         </label>
         <label> Enter your email:
-            <input
+          <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            />
-            {errors.email && <div style={{ color: 'red' }}>{errors.email}</div>}
+          />
+          {errors.email && <div style={{ color: 'red' }}>{errors.email}</div>}
         </label>
-        <input type="submit" />  
-        </form>
-  
+        <input type="submit" />
+      </form>
 
-      </div>
-    );
-  }
-  
-  export default Form;
+
+    </div>
+  );
+}
+
+export default Form;

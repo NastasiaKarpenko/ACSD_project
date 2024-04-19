@@ -5,6 +5,7 @@ function ProductPage(props) {
   const [item, setItem] = useState(null);
   const [basket, setBasket] = useState([]);
   const [quantity, setQuantity] = useState("");
+  const [toggle, setToggle] = useState(false);
   // fetching items in the basket from localstorage
   const savedBasket = localStorage.getItem('basket');
 
@@ -61,11 +62,25 @@ function ProductPage(props) {
     setBasket(filterItems);
   };
 
+  function updateItem(e) {
+    e.preventDefault();
+    if (quantity > 0) {
+      const filterItems = basket.filter(product => product.id !== item.id);
+      const productObject = { id: item.id, quantity: quantity };
+      setBasket([...filterItems, productObject]);
+    }
+  }
 
-
+  const isInBasket = basket.filter(product => product.id === item.id);
   useEffect(() => {
     // set basket array in local storage and listen if it change
     localStorage.setItem('basket', JSON.stringify(basket));
+
+    if (isInBasket) {
+      setToggle(true)
+    } else {
+      setToggle(false)
+    }
   }, [basket]);
 
   return (
@@ -80,7 +95,8 @@ function ProductPage(props) {
           Quantity:
           <form>
             <input type="number" value={quantity} onChange={handleQuantity} required />
-            <button onClick={addItem}>Add to Basket</button>
+            {toggle ? <button onClick={updateItem}>Update</button> : <button onClick={addItem}>Add to Basket</button>}
+
             <button onClick={removeItem}>Remove</button>
           </form>
         </>

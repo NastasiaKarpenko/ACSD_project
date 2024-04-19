@@ -17,8 +17,7 @@ function CatalogLayout(props) {
                     <p>description: {props.item.description}</p>
                     <p>Brand: {props.item.brand}</p>
                     <p>Price: {currency}{props.item.price}</p>
-                    Quantity:
-                    <input>{props.item.quantity}</input>
+
                 </Link>
             </div>
         </div>
