@@ -50,10 +50,12 @@
 import { useState, useEffect } from "react";
 import ProductInfo from '../components/ProductInfo';
 import Summary from "../components/Summary";
+import { Link } from "react-router-dom";
 
 function Basket() {
 
   const selectedItems = JSON.parse(localStorage.getItem('basket'));
+  const isLogin = JSON.parse(localStorage.getItem('user'));
   const [items, setItems] = useState([]);
 
   let count = 0;
@@ -97,7 +99,7 @@ function Basket() {
       setItems(prevItems => [...prevItems, itemData]);
     }
   }
-  console.log(items);
+  // console.log(items);
   return (
     <div>
       <div>
@@ -108,7 +110,8 @@ function Basket() {
         ))}
       </div>
       <div>
-        <Summary />
+        {isLogin ? <p><Summary items={items} /></p> : <Link to="/LogIn"><button >Log in first</button></Link>}
+
       </div>
     </div>
   )

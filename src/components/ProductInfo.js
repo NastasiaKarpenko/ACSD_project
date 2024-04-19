@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+
 
 function ProductInfo(props) {
     let currency = "€";
@@ -8,7 +8,7 @@ function ProductInfo(props) {
     return (
         <div>
             <div>
-
+                hello
 
                 <img src={props.item.images[0]} alt={props.item.title} width={200} />
                 <p><strong>{props.item.title}</strong></p>

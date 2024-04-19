@@ -86,7 +86,7 @@ function AccessPoint() {
                     <h4>Enter password:</h4>
                     <input type="password" value={password} placeholder='Password' onChange={handlePassword} />
                     <button onClick={getAccount}  >
-                        Submit
+                        Log in
                     </button>
                 </form>
             </div>
