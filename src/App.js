@@ -9,7 +9,11 @@ import FullArticle from "./views/FullArticle.js";
 import Basket from "./views/Basket.js";
 import Catalog from "./views/Catalog.js";
 import ProductPage from "./views/ProductPage.js";
+<<<<<<< HEAD
 import LogIn from "./views/LogIn.js";
+=======
+import 'bootstrap/dist/css/bootstrap.min.css';
+>>>>>>> Daniel-CSS
 
 
 
