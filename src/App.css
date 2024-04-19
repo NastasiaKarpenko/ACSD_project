@@ -39,8 +39,6 @@
 }
 
 
-<<<<<<< HEAD
-=======
 /* Define a class for cards in catalog view */
 .catalog-card {
   transition: transform 0.3s ease;
@@ -50,4 +48,4 @@
 .catalog-card:hover {
   transform: scale(1.05);
 }
->>>>>>> Daniel-CSS
+

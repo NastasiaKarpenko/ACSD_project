@@ -92,30 +92,8 @@ function AccessPoint() {
                     )}
                 </div>
             </div>
-<<<<<<< HEAD
-        )
-    } else {
-        return (
-            <div>
-                <h3>Log In</h3>
-                <h4>{error}</h4>
-
-                <h4>User name:</h4>
-                <input type="text" value={email} placeholder='Enter email' onChange={handleEmail} />
-                <h4>Enter password:</h4>
-                <input type="password" value={password} placeholder='Password' onChange={handlePassword} />
-                <button onClick={getAccount}  >
-                    Log in
-                </button>
-
-            </div>
-        )
-    }
-
-=======
         </div>
     );
->>>>>>> Daniel-CSS
 }
 
 export default AccessPoint;

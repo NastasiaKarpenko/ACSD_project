@@ -11,7 +11,6 @@ function Form() {
     email: "",
   };
 
-
   const validationSchema = Yup.object({
     name: Yup.string().matches(/^[A-Za-z ]*$/, "Only alphabets are allowed for this field ").required("Required"),
     email: Yup.string().email("Must be a valid email").required("Required"),
@@ -65,7 +64,7 @@ function Form() {
         />
         {handleValidationError("email")}
 
-        <div className="formBtnPlace"><button type="submit" className="formBtn">Submit</button></div>
+        <div className="formBtnPlace"><button type="submit" className="buttons">Submit</button></div>
       </form>
     </div>
   );

@@ -3,10 +3,6 @@ import ProductInfo from '../components/ProductInfo';
 import CatalogLayout from '../components/CatalogLayout';
 function Catalog() {
   const [items, setItems] = useState([]);
-<<<<<<< HEAD
-  const [itemsBasket, setItemsBasket] = useState([]);
-=======
->>>>>>> Daniel-CSS
 
   useEffect(() => {
     getItemInfo();
@@ -23,18 +19,11 @@ function Catalog() {
     }
   }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> Daniel-CSS
   return (
     <div className="container py-4">
       <h2 className="mb-4">Catalog</h2>
       <div className="row row-cols-1 row-cols-md-3 g-4">
         {items.map((item, index) => (
-<<<<<<< HEAD
-          <CatalogLayout key={index} item={item} />
-=======
           <div className="col mb-4" key={index}>
             <div className="card h-100 border border-dark rounded shadow catalog-card">
               <img src={item.thumbnail} className="card-img-top img-fluid" style={{ maxHeight: '200px' }} alt={item.title} />
@@ -49,7 +38,6 @@ function Catalog() {
               </div>
             </div>
           </div>
->>>>>>> Daniel-CSS
         ))}
       </div>
     </div>
