@@ -1,16 +1,14 @@
 var express = require("express")
+
 var app = express()
 var db = require("./database.js")
 var md5 = require("md5")
+const cors = require('cors');
+app.use(cors());
 
 var bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    next();
-});
 
 var HTTP_PORT = 8000
 

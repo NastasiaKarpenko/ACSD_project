@@ -13,6 +13,9 @@ function UserAccess() {
         e.preventDefault();
         setIsMember(!isMember);
     }
+    function externalToggle() {
+        setIsMember(true);
+    }
 
 
     return (
@@ -20,7 +23,7 @@ function UserAccess() {
             <button onClick={handleClick} disabled={isMember}>Log In</button>
             <button onClick={handleClick} disabled={!isMember}>Register</button>
 
-            {isMember ? <AccessPoint /> : <Register handleClick={handleClick} />}
+            {isMember ? <AccessPoint /> : <Register externalToggle={externalToggle} />}
 
         </div>
     )

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import md5 from "md5";
+import { Link } from 'react-router-dom';
 
 
 
@@ -32,16 +33,16 @@ function AccessPoint() {
         e.preventDefault();
         try {
             let response = await axios.get(`http://localhost:8000/api/user/${email}`);
-            console.log(response);
+
             if (response.data.data) {
                 setAccountData(response.data.data);
-                console.log(accountData);
+
             } else {
                 setError("User not found");
             }
 
         } catch (error) {
-            setError("There is a problem retriving the data");
+            setError("There is a problem retriving the data, try again later");
         }
 
     }
@@ -56,6 +57,8 @@ function AccessPoint() {
             setAccessMessage("welcome back " + accountData.name);
             setIsLogin(true);
             setError("");
+            // Ideally it would be best to store a JWT token so the data is not exposed and accessible
+            localStorage.setItem("user", JSON.stringify(accountData.id));
         } else {
             console.log("not match");
             setError("Email address or password not matching");
@@ -68,7 +71,8 @@ function AccessPoint() {
         return (
             <div>
                 <h3>{accessMessage}</h3>
-                <button>Continue to checkout</button>
+                <Link to="/Basket"><button >Continue to basket</button></Link>
+                <Link to="/Catalog"><button>Continue shopping</button></Link>
             </div>
         )
     } else {
@@ -82,7 +86,7 @@ function AccessPoint() {
                     <h4>Enter password:</h4>
                     <input type="password" value={password} placeholder='Password' onChange={handlePassword} />
                     <button onClick={getAccount}  >
-                        Submit
+                        Log in
                     </button>
                 </form>
             </div>
