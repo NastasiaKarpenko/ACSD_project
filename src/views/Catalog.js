@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ProductInfo from '../components/ProductInfo';
-
+import CatalogLayout from '../components/CatalogLayout';
 function Catalog() {
   const [items, setItems] = useState([]);
   const [itemsBasket, setItemsBasket] = useState([]);
@@ -20,6 +20,7 @@ function Catalog() {
     try {
       const response = await fetch('https://dummyjson.com/products');
       const itemData = await response.json();
+
       setItems(itemData.products);
     } catch (error) {
       console.error("There was an error fetching the data, please try again later");
@@ -39,7 +40,7 @@ function Catalog() {
       <h2>Catalog</h2>
       <ul>
         {items.map((item, index) => (
-          <ProductInfo key={index} item={item} />
+          <CatalogLayout key={index} item={item} />
         ))}
       </ul>
     </div>
