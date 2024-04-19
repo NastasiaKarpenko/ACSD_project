@@ -39,11 +39,6 @@
 }
 
 
-/* Existing styles for the card */
-.card {
-  /* Your existing card styles */
-}
-
 /* Define a class for cards in catalog view */
 .catalog-card {
   transition: transform 0.3s ease;
