@@ -5,10 +5,6 @@ function Catalog() {
   const [items, setItems] = useState([]);
   const [itemsBasket, setItemsBasket] = useState([]);
 
-  // const selectedItems = JSON.parse(localStorage.getItem('basket'));
-  // console.log(selectedItems);
-
-
   useEffect(() => {
 
 
@@ -28,12 +24,6 @@ function Catalog() {
     // console.log(items);
   }
 
-
-  // useEffect(() => {
-  //   const filterItems = items.filter(item => selectedItems.some(data => parseInt(data.id) === item.id));
-  //   setItemsBasket(filterItems);
-  //   // console.log(filterItems);
-  // }, [items]);
 
   return (
     <div>
