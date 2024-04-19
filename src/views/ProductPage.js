@@ -86,20 +86,40 @@ function ProductPage(props) {
   return (
     <div>
       {item ? (
-        <>
-          <img src={item.images[0]} alt={item.title} width={200} />
-          <p><strong>{item.title}</strong></p>
-          <p>Description: {item.description}</p>
-          <p>Brand: {item.brand}</p>
-          <p>Price: {currency}{item.price}</p>
-          Quantity:
-          <form>
-            <input type="number" value={quantity} onChange={handleQuantity} required />
-            {toggle ? <button onClick={updateItem}>Update</button> : <button onClick={addItem}>Add to Basket</button>}
 
-            <button onClick={removeItem}>Remove</button>
-          </form>
-        </>
+        <div className="container py-4">
+          <div className="row">
+            <div className="col-lg-8">
+              <div className="card mb-3">
+
+
+                <div className="card-body">
+                  <img src={item.images[0]} alt={item.title} />
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-4">
+              <div className="card">
+                <div className="card-header">
+                  <p className="card-title mb-0"><strong>{item.title}</strong></p>
+                  <div className="card-body">
+                    <p>Description: {item.description}</p>
+                    <p>Brand: {item.brand}</p>
+                    <p>Price: {currency}{item.price}</p>
+                    Quantity:
+                    <form>
+                      <input type="number" value={quantity} onChange={handleQuantity} required />
+                      {toggle ? <button onClick={updateItem}>Update</button> : <button onClick={addItem}>Add to Basket</button>}
+
+                      <button onClick={removeItem}>Remove</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       ) : (
         <p>Loading...</p>
       )}
