@@ -7,10 +7,10 @@ function Blog() {
     <div>
       {data.map((article, index) => (
         <div key={index}>
-          <img src={article.img} alt="Article" style={{ width: "100px", height: "100px" }} />
-          <h3>{article.header}</h3>
-          <p>{article.date}</p>
-          <p>{article.short}</p>
+          <img src={article.img} alt="Article" className='articleImage' />
+          <h3 class="articleHeader">{article.header}</h3>
+          <div class="articleDate">{article.date}</div>
+          <div class="articleShort">{article.short}</div>
           <Link to={`/blog/${article.id}`} className="buttons">Read More</Link> 
         </div>
       ))}
