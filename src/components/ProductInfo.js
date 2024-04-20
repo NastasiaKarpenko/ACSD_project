@@ -8,7 +8,7 @@ function ProductInfo(props) {
     return (
         <div>
             <div>
-
+                hello
 
                 <img src={props.item.images[0]} alt={props.item.title} width={200} />
                 <p><strong>{props.item.title}</strong></p>
@@ -16,7 +16,6 @@ function ProductInfo(props) {
                 <p>Brand: {props.item.brand}</p>
                 <p>Price: {currency}{props.item.price}</p>
                 <p>Quantity: {props.item.quantity}</p>
-
 
 
             </div>
