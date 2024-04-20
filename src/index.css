@@ -92,6 +92,19 @@ code {
   background-color: var(--fonts-color);
 }
 
+.buttons-p {
+  display: inline-block;
+  padding: 3px 20px;
+  color: #fff;
+  background-color: var(--main-color);
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.buttons-p:hover {
+  background-color: var(--fonts-color);
+}
 /*! HOME PAGE start **/
 /** first screen **/
 .screen1-bg {
@@ -311,9 +324,38 @@ code {
 
 /*! BLOG start **/
 /*Blog page*/
+.blogContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin: 10px;
+}
+
+.blogArticle {
+  flex: 1 1 calc(33.333% - 20px);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.fullArticle{
+  flex: 1 1 calc(33.333% - 20px);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.blogArticle:hover {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
 .articleImage {
-  width: 100px;
-  height: 100px;
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 15px;
 }
 
 .articleHeader {
@@ -321,6 +363,12 @@ code {
   margin-bottom: var(--spacing);
   padding-top: var(--spacing);
   color: var(--main-branding-color);
+}
+
+.articleDate {
+  color: #666;
+  font-size: 0.85em;
+  margin-bottom: 10px;
 }
 
 .articleShort {

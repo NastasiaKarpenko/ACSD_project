@@ -116,9 +116,9 @@ function ProductPage() {
                     Quantity:
                     <form>
                       <input type="number" value={quantity} onChange={handleQuantity} required />
-                      {toggle ? <button onClick={updateItem}>Update</button> : <button onClick={addItem}>Add to Basket</button>}
+                      {toggle ? <button className="buttons-p" onClick={updateItem}>Update</button> : <button className="buttons-p" onClick={addItem}>Add to Basket</button>}
                       {item.id && isInBasket.length > 0 && <button onClick={removeItem}>Remove</button>}
-                      <button onClick={removeItem}>Remove</button>
+                      <button className="buttons-p" onClick={removeItem}>Remove</button>
                     </form>
                   </div>
                 </div>

@@ -4,9 +4,9 @@ import data from '../components/data';
 
 function Blog() {
   return (
-    <div>
+    <div className="blogContainer">
       {data.map((article, index) => (
-        <div key={index}>
+        <div className='blogArticle' key={index}>
           <img src={article.img} alt="Article" className='articleImage' />
           <h3 class="articleHeader">{article.header}</h3>
           <div class="articleDate">{article.date}</div>

@@ -65,7 +65,7 @@ function Register(prop) {
                                 <label htmlFor="password" className="form-label">Password:</label>
                                 <input type="password" className="form-control" id="password" value={password} onChange={handlePassword} />
                             </div>
-                            <button className="btn btn-primary" onClick={handleSubmit}>Submit</button>
+                            <button className="buttons" onClick={handleSubmit}>Submit</button>
                         </div>
                     </div>
                 </div>
