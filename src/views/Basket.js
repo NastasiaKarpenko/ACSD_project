@@ -13,7 +13,9 @@ function Basket() {
 
   useEffect(() => {
 
+
     if (selectedItems.length > 0) {
+
       selectedItems.map((i) => {
         getItemInfo(i);
       })
@@ -48,12 +50,14 @@ function Basket() {
               <h5 className="card-title mb-0">Basket</h5>
             </div>
             <div className="card-body">
+
+
               {selectedItems ? (
                 items.map((i, index) => (
                   <ProductInfo key={index} item={i} />
                 ))
               ) : (
-                <Link to="/Catalog" className="btn btn-secondary">
+               <Link to="/Catalog" className="btn btn-secondary">
                   Go to Catalog
                 </Link>
               )}

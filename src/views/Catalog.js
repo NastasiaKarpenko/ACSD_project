@@ -3,7 +3,6 @@ import ProductInfo from '../components/ProductInfo';
 import CatalogLayout from '../components/CatalogLayout';
 function Catalog() {
   const [items, setItems] = useState([]);
-  const [itemsBasket, setItemsBasket] = useState([]);
 
   useEffect(() => {
     getItemInfo();
@@ -20,14 +19,15 @@ function Catalog() {
     }
   }
 
-
   return (
     <div className="container py-4">
       <h2 className="mb-4">Catalog</h2>
       <div className="row row-cols-1 row-cols-md-3 g-4">
         {items.map((item, index) => (
 
+
           <CatalogLayout key={index} item={item} />
+
         ))}
       </div>
     </div>

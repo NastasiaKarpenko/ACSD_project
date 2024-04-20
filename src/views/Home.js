@@ -15,7 +15,6 @@ function Home() {
       <div className="discount-section">
         <div className='inner-text'>
           <h2>10% discount</h2>
-          <p>Some convincing text about your products.</p>
           <Form />
         </div>
         
