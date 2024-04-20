@@ -1,23 +1,24 @@
 
 import React, { useState, useEffect } from "react";
 
-function ProductPage(props) {
-  const [item, setItem] = useState(null);
+function ProductPage() {
+  const [item, setItem] = useState({});
   const [basket, setBasket] = useState([]);
   const [quantity, setQuantity] = useState("");
   const [toggle, setToggle] = useState(false);
   // fetching items in the basket from localstorage
-  const savedBasket = localStorage.getItem('basket');
-
+  const savedBasket = JSON.parse(localStorage.getItem('basket'));
+  console.log(savedBasket);
   let currency = "€";
   let max = 30;
   let min = 1
   // get product id from localstorage
   const productSaved = localStorage.getItem('single');
   useEffect(() => {
-    // checking if there is any set it in the basket array
-    if (savedBasket) {
-      setBasket(JSON.parse(savedBasket));
+
+    // checking if there is any and set it in the basket array
+    if (savedBasket && basket.length === 0) {
+      setBasket(savedBasket);
     }
 
     // cheking for product id if no generate a random product
@@ -51,15 +52,19 @@ function ProductPage(props) {
   function addItem(e) {
     e.preventDefault();
     if (quantity > 0) {
-      const productObject = { id: item.id, quantity: quantity };
+      const productObject = { id: item.id.toString(), quantity: quantity };
       setBasket([...basket, productObject]);
+      alert("Your item has been added");
     }
   };
   // remove item by id if exist in the array and reset the basket array
   function removeItem(e) {
     e.preventDefault();
+
     const filterItems = basket.filter(product => product.id !== item.id);
     setBasket(filterItems);
+    alert("Your item has been removed");
+
   };
 
   function updateItem(e) {
@@ -68,7 +73,9 @@ function ProductPage(props) {
       const filterItems = basket.filter(product => product.id !== item.id);
       const productObject = { id: item.id, quantity: quantity };
       setBasket([...filterItems, productObject]);
+      alert("Your item has been updated");
     }
+
   }
 
   const isInBasket = basket.filter(product => product.id === item.id);
@@ -76,7 +83,7 @@ function ProductPage(props) {
     // set basket array in local storage and listen if it change
     localStorage.setItem('basket', JSON.stringify(basket));
 
-    if (isInBasket) {
+    if (isInBasket.length > 0) {
       setToggle(true)
     } else {
       setToggle(false)
@@ -85,7 +92,7 @@ function ProductPage(props) {
 
   return (
     <div>
-      {item ? (
+      {item.id ? (
 
         <div className="container py-4">
           <div className="row">
@@ -110,7 +117,7 @@ function ProductPage(props) {
                     <form>
                       <input type="number" value={quantity} onChange={handleQuantity} required />
                       {toggle ? <button onClick={updateItem}>Update</button> : <button onClick={addItem}>Add to Basket</button>}
-
+                      {item.id && isInBasket.length > 0 && <button onClick={removeItem}>Remove</button>}
                       <button onClick={removeItem}>Remove</button>
                     </form>
                   </div>
