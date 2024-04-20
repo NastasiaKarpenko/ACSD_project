@@ -16,10 +16,6 @@ function AccessPoint() {
         if (password && accountData) {
             verifyAccess();
         }
-        // if (userID) {
-        //     setAccessMessage("welcome back " + accountData.name);
-        //     setIsLogin(true);
-        // }
     }, [accountData]);
 
     function handleEmail(e) {
@@ -30,8 +26,8 @@ function AccessPoint() {
         setPassword(e.target.value);
     }
 
-    async function getAccount() {
-
+    async function getAccount(e) {
+        e.preventDefault();
         try {
             let response = await axios.get(`http://localhost:8000/api/user/${email}`);
 
