@@ -70,7 +70,7 @@ function Basket() {
               <h5 className="card-title mb-0">Summary</h5>
             </div>
             <div className="card-body">
-              {isLogin && selectedItems ? <Summary items={items} /> : <Link to="/LogIn" className="btn btn-primary btn-block">Log in first</Link>}
+              {isLogin && selectedItems ? <Summary items={items} /> : <Link to="/LogIn" className="buttons btn-primary btn-block">Log in first</Link>}
             </div>
           </div>
         </div>

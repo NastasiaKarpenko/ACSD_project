@@ -81,7 +81,7 @@ function AccessPoint() {
                                         <label htmlFor="password" className="form-label">Password:</label>
                                         <input type="password" className="form-control" id="password" value={password} onChange={handlePassword} />
                                     </div>
-                                    <button type="submit" className="btn btn-primary" onClick={getAccount}>Log in</button>
+                                    <button type="submit" className="buttons" onClick={getAccount}>Log in</button>
                                 </form>
                             </div>
                         </div>
