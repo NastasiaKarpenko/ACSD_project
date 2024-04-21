@@ -138,6 +138,7 @@ function ProductPage() {
                       {toggle ? <button onClick={updateItem} className="btn btn-primary">Update</button> : <button onClick={addItem} className="btn btn-primary">Add to Basket</button>}
 
 
+                      <button onClick={() => removeItem(item.id)} className="btn btn-primary">Remove</button>
                     </div>
                   </div>
                 </div>
