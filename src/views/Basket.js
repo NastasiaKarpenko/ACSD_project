@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 
 function Basket() {
 
-  const selectedItems = JSON.parse(localStorage.getItem('basket'));
+  const [selectedItems, setSelectedItems] = useState(JSON.parse(localStorage.getItem('basket')) || []);
+  // const selectedItems = JSON.parse(localStorage.getItem('basket')) || [];
   const isLogin = JSON.parse(localStorage.getItem('user'));
   const [items, setItems] = useState([]);
 
@@ -20,6 +21,9 @@ function Basket() {
 
     }
   }, []);
+  useEffect(() => {
+    localStorage.setItem('basket', JSON.stringify(selectedItems));
+  }, [selectedItems]);
 
   const getItemInfo = async function (id) {
     try {
@@ -39,6 +43,16 @@ function Basket() {
     }
   }
 
+  function removeItem(productId) {
+
+    const filterItems = items.filter(product => parseInt(product.id) !== productId);
+
+    setItems(filterItems);
+
+    localStorage.setItem('basket', JSON.stringify(filterItems))
+    alert("Your item has been removed");
+  }
+
   return (
     <div className="container py-4">
       <div className="row">
@@ -50,7 +64,7 @@ function Basket() {
             <div className="card-body">
               {selectedItems ? (
                 items.map((i, index) => (
-                  <ProductInfo key={index} item={i} />
+                  <ProductInfo key={index} item={i} removeItem={removeItem} />
                 ))
               ) : (
                 <Link to="/Catalog" className="btn btn-secondary">

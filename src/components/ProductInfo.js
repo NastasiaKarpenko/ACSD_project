@@ -16,6 +16,7 @@ function ProductInfo(props) {
                 <p>Brand: {props.item.brand}</p>
                 <p>Price: {currency}{props.item.price}</p>
                 <p>Quantity: {props.item.quantity}</p>
+                <button onClick={() => props.removeItem(props.item.id)}>Remove</button>
 
 
             </div>

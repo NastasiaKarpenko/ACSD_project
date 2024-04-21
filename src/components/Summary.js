@@ -4,7 +4,7 @@ function Summary(props) {
     let deliveryCharge = 0.00;
     const [total, setTotal] = useState(deliveryCharge)
     let currency = "€";
-
+    const selectedItems = JSON.parse(localStorage.getItem('basket'));
     let taxText = "Total (VAT included)"
 
 
