@@ -2,25 +2,34 @@ import React, { useEffect, useState } from 'react'
 
 function Summary(props) {
     let deliveryCharge = 0.00;
-    const [total, setTotal] = useState(deliveryCharge)
+    const [total, setTotal] = useState(deliveryCharge);
+    const [totalNoTax, setTotalNoTax] = useState(deliveryCharge);
     let currency = "€";
     const selectedItems = JSON.parse(localStorage.getItem('basket'));
     let taxText = "Total (VAT included)"
 
 
     useEffect(() => {
-        setTotal(deliveryCharge)
-        calcutateTotal();
-
-    }, [props.items]);
+        if (selectedItems.length === props.items.length) {
+            setTotal(deliveryCharge)
+            calcutateTotal();
+            console.log("caculate run")
+        }
+    }, [props.items, selectedItems]);
 
     function calcutateTotal() {
         let cost = 0;
         props.items.map((i) => {
-            cost = total + parseFloat(i.price);
+            let allTogether = parseFloat(i.price) * parseFloat(i.quantity);
+            cost += allTogether;
 
         })
         setTotal(cost)
+        noTax();
+    }
+    function noTax() {
+        let value = total - (23 / 100 * total);
+        setTotalNoTax(value);
     }
 
     return (
@@ -37,7 +46,7 @@ function Summary(props) {
                     <tbody>
                         <tr>
                             <td>Subtotal</td>
-                            <td>{currency}price</td>
+                            <td>{currency}{totalNoTax}</td>
                         </tr>
                         <tr>
                             <td>Delivery</td>
