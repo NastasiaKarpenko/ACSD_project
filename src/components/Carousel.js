@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ReactCarousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { Link } from "react-router-dom";
 
 const responsive = {
   desktop: {
@@ -17,7 +18,7 @@ const responsive = {
   },
 };
 
-function Carousel({itemsLimit}) {
+function Carousel({ itemsLimit }) {
   const [items, setItems] = useState([]);
   const [error, setError] = useState("");
 
@@ -29,6 +30,10 @@ function Carousel({itemsLimit}) {
   }, []);
   console.log(items);
 
+  function handleId(key) {
+    localStorage.setItem("single", JSON.stringify(items[key].id));
+    console.log(key)
+  }
   return (
     <div>
       {error ? (
@@ -44,11 +49,13 @@ function Carousel({itemsLimit}) {
           containerClass="carousel-container"
         >
           {items.map((item, key) => (
-            <div key={key} className="carusel-item">
-              <img className="carousel-image" src={item.images[0]}></img>
-              <div className="item-title">{item.title}</div>
-              <div className="item-price">{item.price} eur</div>
-            </div>
+            <Link to='/ProductPage' onClick={() => handleId(item.id)}>
+              <div key={key} className="carusel-item">
+                <img className="carousel-image" src={item.images[0]}></img>
+                <div className="item-title">{item.title}</div>
+                <div className="item-price">{item.price} eur</div>
+              </div>
+            </Link>
           ))}
         </ReactCarousel>
       )}
