@@ -3,23 +3,26 @@ import React, { useState, useEffect } from "react";
 
 function ProductPage() {
   const [item, setItem] = useState({});
-  const [basket, setBasket] = useState([]);
+  const [basket, setBasket] = useState(JSON.parse(localStorage.getItem('basket')) || []);
   const [quantity, setQuantity] = useState("");
   const [toggle, setToggle] = useState(false);
+
   // fetching items in the basket from localstorage
-  const savedBasket = JSON.parse(localStorage.getItem('basket'));
-  console.log(savedBasket);
+  // const savedBasket = JSON.parse(localStorage.getItem('basket'));
+
   let currency = "€";
   let max = 30;
   let min = 1
   // get product id from localstorage
   const productSaved = localStorage.getItem('single');
+
+
   useEffect(() => {
 
     // checking if there is any and set it in the basket array
-    if (savedBasket && basket.length === 0) {
-      setBasket(savedBasket);
-    }
+    // if (savedBasket) {
+    //   setBasket(savedBasket);
+    // }
 
     // cheking for product id if no generate a random product
     if (productSaved) {
@@ -29,6 +32,7 @@ function ProductPage() {
       localStorage.setItem('single', JSON.stringify(randomId));
       getItemInfo(randomId);
     }
+
   }, []);
 
 
@@ -51,43 +55,56 @@ function ProductPage() {
   // adding item and quantity to the basket array
   function addItem(e) {
     e.preventDefault();
-    if (quantity > 0) {
+    if (quantity > item.stock) {
+      alert("Sorry, quantity exeeds the available amount")
+    } else if (quantity > 0) {
       const productObject = { id: item.id.toString(), quantity: quantity };
       setBasket([...basket, productObject]);
+
       alert("Your item has been added");
     }
   };
   // remove item by id if exist in the array and reset the basket array
-  function removeItem(e) {
-    e.preventDefault();
+  function removeItem(productId) {
 
-    const filterItems = basket.filter(product => product.id !== item.id);
+    const filterItems = basket.filter(product => parseInt(product.id) !== productId);
+
     setBasket(filterItems);
-    alert("Your item has been removed");
 
-  };
+    localStorage.setItem('basket', JSON.stringify(filterItems))
+    alert("Your item has been removed");
+  }
 
   function updateItem(e) {
     e.preventDefault();
-    if (quantity > 0) {
-      const filterItems = basket.filter(product => product.id !== item.id);
-      const productObject = { id: item.id, quantity: quantity };
+    if (quantity > item.stock) {
+      alert("Sorry, quantity exeeds the abailable amount")
+    } else if (quantity > 0) {
+      const filterItems = basket.filter(product => parseInt(product.id) !== item.id);
+      const productObject = { id: item.id.toString(), quantity: quantity };
       setBasket([...filterItems, productObject]);
       alert("Your item has been updated");
     }
 
   }
 
-  const isInBasket = basket.filter(product => product.id === item.id);
   useEffect(() => {
+    // checkiing if item displayed is in the basket
+    const isInBasket = basket.filter(product => {
+      console.log(typeof product.id);
+      return product.id === productSaved;
+    });
+
     // set basket array in local storage and listen if it change
     localStorage.setItem('basket', JSON.stringify(basket));
-
+    console.log(isInBasket)
+    // toggle between add/remove button
     if (isInBasket.length > 0) {
-      setToggle(true)
+      setToggle(true);
     } else {
-      setToggle(false)
+      setToggle(false);
     }
+
   }, [basket]);
 
   return (
@@ -114,12 +131,14 @@ function ProductPage() {
                     <p>Brand: {item.brand}</p>
                     <p>Price: {currency}{item.price}</p>
                     Quantity:
-                    <form>
-                      <input type="number" value={quantity} onChange={handleQuantity} required />
-                      {toggle ? <button className="buttons-p" onClick={updateItem}>Update</button> : <button className="buttons-p" onClick={addItem}>Add to Basket</button>}
-                      {item.id && isInBasket.length > 0 && <button onClick={removeItem}>Remove</button>}
-                      <button className="buttons-p" onClick={removeItem}>Remove</button>
-                    </form>
+
+
+                    <input type="number" value={quantity} onChange={handleQuantity} required />
+                    {toggle ? <button onClick={updateItem}>Update</button> : <button onClick={addItem}>Add to Basket</button>}
+
+                    <button onClick={() => removeItem(item.id)}>Remove</button>
+
+
                   </div>
                 </div>
               </div>
