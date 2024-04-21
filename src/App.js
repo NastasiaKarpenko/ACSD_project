@@ -9,8 +9,10 @@ import FullArticle from "./views/FullArticle.js";
 import Basket from "./views/Basket.js";
 import Catalog from "./views/Catalog.js";
 import ProductPage from "./views/ProductPage.js";
-import LogIn from "./views/LogIn.js"
+
+import LogIn from "./views/LogIn.js";
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 

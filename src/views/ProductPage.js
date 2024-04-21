@@ -132,10 +132,12 @@ function ProductPage() {
                     <p>Price: {currency}{item.price}</p>
                     Quantity:
 
+
                     <input type="number" value={quantity} onChange={handleQuantity} required />
                     {toggle ? <button onClick={updateItem}>Update</button> : <button onClick={addItem}>Add to Basket</button>}
 
                     <button onClick={() => removeItem(item.id)}>Remove</button>
+
 
                   </div>
                 </div>

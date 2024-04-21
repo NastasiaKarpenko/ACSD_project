@@ -8,10 +8,10 @@ function FullArticle() {
 
   return (
     article ? (
-      <div>
-        <img src={article.img} alt={article.header} />
+      <div className="fullArticle">
+        <img className="articleImage" src={article.img} alt={article.header} />
         <h2>{article.header}</h2>
-        <p>{article.date}</p>
+        <p class="articleDate">{article.date}</p>
         <div dangerouslySetInnerHTML={{ __html: article.long }}></div>
         <Link to="/blog" className="buttons">Back to Blog</Link>
       </div>

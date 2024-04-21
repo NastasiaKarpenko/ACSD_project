@@ -22,7 +22,7 @@ function CatalogLayout(props) {
                                 <p className="card-text">Rating: {props.item.rating}</p>
                             </div>
                             <div className="card-footer bg-transparent border-0">
-                                <button onClick={handleId} className="btn btn-primary">Add to Cart</button>
+                                <button onClick={handleId} className="buttons">Add to Cart</button>
                             </div>
                         </div>
                     </div>
