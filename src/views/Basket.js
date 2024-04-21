@@ -71,7 +71,7 @@ function Basket() {
                   <ProductInfo key={index} item={i} removeItem={removeItem} />
                 ))
               ) : (
-               <Link to="/Catalog" className="btn btn-secondary">
+                <Link to="/Catalog" className="btn btn-secondary">
                   Go to Catalog
                 </Link>
               )}
