@@ -9,15 +9,18 @@ function Summary(props) {
 
 
     useEffect(() => {
-        setTotal(deliveryCharge)
-        calcutateTotal();
-
-    }, [props.items]);
+        if (selectedItems.length === props.items.length) {
+            setTotal(deliveryCharge)
+            calcutateTotal();
+            console.log("caculate run")
+        }
+    }, [props.items, selectedItems]);
 
     function calcutateTotal() {
         let cost = 0;
         props.items.map((i) => {
-            cost = total + parseFloat(i.price);
+            let allTogether = parseFloat(i.price) * parseFloat(i.quantity);
+            cost += allTogether;
 
         })
         setTotal(cost)

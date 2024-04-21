@@ -3,7 +3,7 @@
 function ProductInfo(props) {
     let currency = "€";
 
-    const selectedItems = JSON.parse(localStorage.getItem('basket'));
+
 
     return (
         <div>
@@ -16,8 +16,9 @@ function ProductInfo(props) {
                 <p>Brand: {props.item.brand}</p>
                 <p>Price: {currency}{props.item.price}</p>
                 <p>Quantity: {props.item.quantity}</p>
-                <button onClick={() => props.removeItem(props.item.id)}>Remove</button>
-
+                <div className="card-footer bg-transparent border-0">
+                    <button onClick={() => props.removeItem(props.item.id)} className="btn btn-primary">Remove</button>
+                </div>
 
             </div>
         </div>
