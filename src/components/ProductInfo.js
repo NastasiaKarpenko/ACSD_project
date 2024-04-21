@@ -17,7 +17,7 @@ function ProductInfo(props) {
                 <p>Price: {currency}{props.item.price}</p>
                 <p>Quantity: {props.item.quantity}</p>
                 <div className="card-footer bg-transparent border-0">
-                    <button onClick={() => props.removeItem(props.item.id)} className="btn btn-primary">Remove</button>
+                    <button onClick={() => props.removeItem(props.item.id)} className="buttons btn-primary">Remove</button>
                 </div>
 
             </div>

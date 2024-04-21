@@ -135,10 +135,10 @@ function ProductPage() {
 
                     <input type="number" value={quantity} onChange={handleQuantity} required />
                     <div className="card-footer bg-transparent border-0">
-                      {toggle ? <button onClick={updateItem} className="btn btn-primary">Update</button> : <button onClick={addItem} className="btn btn-primary">Add to Basket</button>}
+                      {toggle ? <button onClick={updateItem} className="buttons btn-primary">Update</button> : <button onClick={addItem} className="buttons btn-primary">Add to Basket</button>}
 
 
-                      <button onClick={() => removeItem(item.id)} className="btn btn-primary">Remove</button>
+                      <button onClick={() => removeItem(item.id)} className="buttons btn-primary">Remove</button>
                     </div>
                   </div>
                 </div>
